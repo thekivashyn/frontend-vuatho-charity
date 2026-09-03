@@ -1,0 +1,185 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Warm accent, used sparingly for actions and progress. */
+  --color-brand-50: #fff5ef;
+  --color-brand-100: #ffe6d8;
+  --color-brand-200: #ffcbb0;
+  --color-brand-300: #ffa67d;
+  --color-brand-400: #ff7d48;
+  --color-brand-500: #f45f22;
+  --color-brand-600: #dd4b13;
+  --color-brand-700: #b53b10;
+  --color-brand-800: #913112;
+  --color-brand-900: #762b13;
+
+  /* Warm neutrals for text and surfaces. */
+  --color-ink-950: #0f0d0c;
+  --color-ink-900: #1c1917;
+  --color-ink-800: #292524;
+  --color-ink-700: #44403c;
+  --color-ink-600: #57534e;
+  --color-ink-500: #78716c;
+  --color-ink-400: #a8a29e;
+  --color-ink-300: #d6d3d1;
+  --color-ink-200: #e7e5e4;
+  --color-ink-100: #f3f2f0;
+  --color-ink-50: #faf9f7;
+
+  --font-sans:
+    'Be Vietnam Pro', 'Inter', ui-sans-serif, system-ui, -apple-system,
+    'Segoe UI', Roboto, sans-serif;
+
+  /* Soft, borderless elevation. */
+  --shadow-soft:
+    0 1px 2px rgb(28 25 23 / 0.04), 0 16px 40px -20px rgb(28 25 23 / 0.16);
+  --shadow-lift:
+    0 2px 4px rgb(28 25 23 / 0.04), 0 28px 56px -24px rgb(28 25 23 / 0.22);
+
+  /*
+   * Motion system. Every `transition` utility picks these up, so hover,
+   * focus and state changes share one duration and one curve.
+   */
+  --default-transition-duration: 220ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+
+  --animate-pop: pop 0.28s var(--ease-out-expo) both;
+  --animate-fade-in: fade-in 0.4s var(--ease-out-quart) both;
+
+  @keyframes pop {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Lets `height: auto` and `block-size: auto` interpolate where supported. */
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink-900);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-brand-100);
+  color: var(--color-ink-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Modal: enter and exit transitions on both the panel and the backdrop. */
+dialog {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+  transition:
+    opacity 0.22s var(--ease-out-quart),
+    transform 0.3s var(--ease-out-expo),
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+
+dialog[open] {
+  opacity: 1;
+  transform: none;
+}
+
+dialog::backdrop {
+  background: rgb(28 25 23 / 0);
+  backdrop-filter: blur(0);
+  transition:
+    background-color 0.3s var(--ease-out-quart),
+    backdrop-filter 0.3s var(--ease-out-quart),
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
+}
+
+dialog[open]::backdrop {
+  background: rgb(28 25 23 / 0.45);
+  backdrop-filter: blur(6px);
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  dialog[open]::backdrop {
+    background: rgb(28 25 23 / 0);
+    backdrop-filter: blur(0);
+  }
+}
+
+/* Accordion: animates open and close in browsers that expose ::details-content. */
+details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size 0.3s var(--ease-out-expo),
+    content-visibility 0.3s allow-discrete;
+}
+
+details[open]::details-content {
+  block-size: auto;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
