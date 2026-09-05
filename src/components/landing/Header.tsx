@@ -1,3 +1,4 @@
+import { SoundToggle } from '#/components/ui/SoundFeedback'
 import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { BrandLogo } from '#/components/ui/BrandLogo'
@@ -108,6 +109,7 @@ export function Header() {
             setMenuOpen(false)
         }}
       >
+        <span className="reading-progress" aria-hidden />
         <div className="page-width header-inner">
           <a
             href="/"
@@ -130,6 +132,9 @@ export function Header() {
             ))}
           </nav>
           <div className="header-actions">
+            <span className="nav-sound">
+              <SoundToggle compact />
+            </span>
             <button className="nav-help-link" onClick={() => open('can-giup')}>
               Tôi cần giúp đỡ
             </button>
@@ -181,6 +186,10 @@ export function Header() {
               <ArrowUpRight size={16} aria-hidden />
             </a>
           ))}
+          <div className="nav-menu-sound">
+            <SoundToggle />
+            <span>Chỉ phát khi bạn thao tác.</span>
+          </div>
           <div className="nav-menu-footer">
             <p>
               Khi cần một điểm tựa,

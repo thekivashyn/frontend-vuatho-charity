@@ -1779,7 +1779,8 @@ p {
   position: absolute;
   inset: 0 0 0 28%;
   margin: 0;
-  z-index: -1;
+  z-index: 0;
+  overflow: hidden;
 }
 .homecoming-art img {
   width: 100%;
@@ -1787,16 +1788,21 @@ p {
   object-fit: cover;
   object-position: 65% 50%;
 }
-.homecoming-art::after {
+/* Blend across the entire stage, so the animated image edge cannot show
+   through a fractional-pixel seam at the left boundary of its own layer. */
+.homecoming-stage::after {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 1;
+  pointer-events: none;
   background: linear-gradient(
     90deg,
     #f8f4e9 0%,
-    rgba(248, 244, 233, 0.95) 7%,
-    rgba(248, 244, 233, 0.55) 25%,
-    transparent 48%
+    #f8f4e9 30%,
+    rgba(248, 244, 233, 0.95) 34%,
+    rgba(248, 244, 233, 0.55) 46%,
+    transparent 64%
   );
 }
 .homecoming-art figcaption {
@@ -1814,6 +1820,8 @@ p {
   border-radius: 2px;
 }
 .homecoming-content {
+  position: relative;
+  z-index: 2;
   padding-block: 56px;
 }
 .homecoming-copy {
@@ -2011,6 +2019,8 @@ p {
     min-height: 0;
   }
   .homecoming-content {
+    position: relative;
+    z-index: 2;
     order: 0;
     padding-block: 37px 28px;
   }
@@ -2042,7 +2052,14 @@ p {
     aspect-ratio: 1.5;
     z-index: 0;
   }
+  .homecoming-stage::after {
+    display: none;
+  }
   .homecoming-art::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
     background: linear-gradient(0deg, #173d3b65, transparent 38%);
   }
   .homecoming-art img {

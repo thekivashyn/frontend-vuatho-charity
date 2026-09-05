@@ -1,3 +1,4 @@
+import { SoundToggle } from '#/components/ui/SoundFeedback'
 import { ArrowUpRight, Mail, Phone } from 'lucide-react'
 import { BrandLogo } from '#/components/ui/BrandLogo'
 import { contact } from '#/data/content'
@@ -80,7 +81,7 @@ export function Footer() {
             © {new Date().getFullYear()} Công ty TNHH Công nghệ Vua Thợ.{' '}
             <span>MST: 0318063280</span>
           </p>
-          <p>Cùng nhau làm điều tử tế.</p>
+          <SoundToggle />
         </div>
       </div>
     </footer>

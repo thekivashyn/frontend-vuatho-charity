@@ -1,0 +1,257 @@
+/* Effects are short, finite, and never animate the scannable QR surface. */
+.sound-feedback-root {
+  display: contents;
+}
+.sound-control {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 11px;
+  background: transparent;
+  border: 1px solid #cfd8c6;
+  border-radius: 22px;
+  color: #60745c;
+  font-size: 11px;
+  cursor: pointer;
+}
+.sound-toggle[aria-pressed='true'] {
+  background: #e9eedf;
+  color: #345a3c;
+  border-color: #a0b18f;
+}
+.sound-toggle:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.sound-toggle:focus-visible {
+  outline: 2px solid #9c783d;
+  outline-offset: 3px;
+}
+.sound-control-compact .sound-toggle {
+  width: 38px;
+  height: 38px;
+  min-height: 38px;
+  padding: 0;
+  justify-content: center;
+}
+.sound-error {
+  position: absolute;
+  z-index: 3;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 230px;
+  padding: 12px;
+  background: #fffdf5;
+  color: #5a614d;
+  border: 1px solid #dce1d1;
+  border-radius: 9px;
+  font-size: 11px;
+  box-shadow: 0 5px 20px #234b3c14;
+}
+.nav-sound {
+  display: inline-flex;
+}
+.nav-menu-sound {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+}
+.nav-menu-sound > span {
+  font-size: 10px;
+  color: #7a846f;
+}
+.reading-progress {
+  display: none;
+}
+@media (max-width: 1000px) {
+  .nav-sound {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .homecoming-copy > .eyebrow {
+    animation: soft-arrival 0.65s 0.05s both;
+  }
+  .homecoming-copy h1 {
+    animation: soft-arrival 0.8s 0.13s both;
+  }
+  .homecoming-description {
+    animation: soft-arrival 0.75s 0.24s both;
+  }
+  .homecoming-actions {
+    animation: soft-arrival 0.7s 0.34s both;
+  }
+  .homecoming-footnote {
+    animation: soft-arrival 0.6s 0.43s both;
+  }
+  .homecoming-art img {
+    animation: painting-arrival 1.4s ease-out both;
+  }
+  .homecoming-art figcaption {
+    animation: soft-arrival 0.8s 0.5s both;
+  }
+  [data-reveal-visible='true'] .process-grid li {
+    animation: soft-arrival 0.65s both;
+  }
+  [data-reveal-visible='true'] .process-grid li:nth-child(2) {
+    animation-delay: 0.09s;
+  }
+  [data-reveal-visible='true'] .process-grid li:nth-child(3) {
+    animation-delay: 0.18s;
+  }
+  .modern-header .mobile-nav:not([hidden]) {
+    animation: menu-arrival 0.22s ease-out both;
+    transform-origin: top right;
+  }
+  .donation-form {
+    animation: soft-arrival 0.25s ease-out both;
+  }
+  .bank-transfer {
+    animation: quiet-fade 0.2s ease-out both;
+  }
+  .gift-amount-summary strong {
+    animation: amount-arrival 0.2s ease-out;
+  }
+  .donation-presets button[aria-pressed='true'] svg {
+    animation: mark-arrival 0.23s ease-out;
+  }
+  .faq-list details[open] > p,
+  .terms-list details[open] > p {
+    animation: soft-arrival 0.2s ease-out;
+  }
+  .qr-download {
+    animation: quiet-fade 0.2s ease-out;
+  }
+  .contact-dialog[open] {
+    animation: menu-arrival 0.22s ease-out;
+  }
+  .button:active,
+  .donation-presets button:active {
+    transform: scale(0.985);
+  }
+  @supports (animation-timeline: scroll()) {
+    .reading-progress {
+      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 2px;
+      background: #b39b61;
+      pointer-events: none;
+      transform-origin: left;
+      animation: reading-line linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .mission-feature figure,
+  .process-painting,
+  .trust-painting {
+    overflow: hidden;
+  }
+  .mission-feature img,
+  .process-painting img,
+  .trust-painting img,
+  .donation-painting img,
+  .morning-banner img {
+    transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .mission-feature figure:hover img,
+  .process-painting:hover img,
+  .trust-painting:hover img,
+  .donation-painting:hover img,
+  .morning-banner:hover img {
+    transform: scale(1.025);
+  }
+  .purpose-emblem,
+  .value-emblem {
+    transition: transform 0.3s ease;
+  }
+  .value-item:hover .value-emblem {
+    transform: translateY(-3px) rotate(-4deg);
+  }
+}
+@keyframes soft-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes painting-arrival {
+  from {
+    opacity: 0.65;
+    transform: scale(1.025);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes quiet-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes menu-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes amount-arrival {
+  from {
+    opacity: 0.4;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes mark-arrival {
+  from {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes reading-line {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal-visible] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

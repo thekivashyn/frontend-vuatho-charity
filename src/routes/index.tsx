@@ -1,3 +1,4 @@
+import { SoundProvider } from '#/components/ui/SoundFeedback'
 import { createFileRoute } from '@tanstack/react-router'
 import { BackToTop } from '#/components/landing/BackToTop'
 import { CallToAction } from '#/components/landing/CallToAction'
@@ -17,22 +18,24 @@ import { Transparency } from '#/components/landing/Transparency'
 export const Route = createFileRoute('/')({ component: LandingPage })
 function LandingPage() {
   return (
-    <ContactProvider>
-      <Header />
-      <main id="noi-dung">
-        <Hero />
-        <CommunityValues />
-        <Mission />
-        <WaysToHelp />
-        <HowItWorks />
-        <Transparency />
-        <CommunityBelief />
-        <CallToAction />
-        <Faq />
-        <DonationTerms />
-      </main>
-      <Footer />
-      <BackToTop />
-    </ContactProvider>
+    <SoundProvider>
+      <ContactProvider>
+        <Header />
+        <main id="noi-dung">
+          <Hero />
+          <CommunityValues />
+          <Mission />
+          <WaysToHelp />
+          <HowItWorks />
+          <Transparency />
+          <CommunityBelief />
+          <CallToAction />
+          <Faq />
+          <DonationTerms />
+        </main>
+        <Footer />
+        <BackToTop />
+      </ContactProvider>
+    </SoundProvider>
   )
 }

@@ -357,7 +357,7 @@ export function WaysToHelp() {
                 aria-atomic="true"
               >
                 <span>Khoản góp của bạn</span>
-                <strong>
+                <strong key={amount ?? 'custom'}>
                   {amount !== null ? formatVnd(amount) : 'Tùy tâm lựa chọn'}
                 </strong>
               </div>

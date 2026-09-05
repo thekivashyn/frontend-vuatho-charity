@@ -16,6 +16,8 @@ export function useInView<T extends HTMLElement>(threshold = 0.15) {
     const element = ref.current
     if (!element) return
     if (typeof IntersectionObserver === 'undefined') return
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (reducedMotion.matches) return
 
     const rect = element.getBoundingClientRect()
     const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0
@@ -33,8 +35,18 @@ export function useInView<T extends HTMLElement>(threshold = 0.15) {
       { threshold, rootMargin: '0px 0px -8% 0px' },
     )
 
+    const onPreferenceChange = () => {
+      if (reducedMotion.matches) {
+        setInView(true)
+        observer.disconnect()
+      }
+    }
+    reducedMotion.addEventListener('change', onPreferenceChange)
     observer.observe(element)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      reducedMotion.removeEventListener('change', onPreferenceChange)
+    }
   }, [threshold])
 
   return { ref, inView }
