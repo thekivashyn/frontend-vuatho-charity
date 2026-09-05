@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowUpRight, Menu, X } from 'lucide-react'
 import { BrandLogo } from '#/components/ui/BrandLogo'
 import { useContact } from '#/components/landing/ContactDialog'
@@ -10,6 +10,7 @@ const links = [
   { href: '#hoi-dap', label: 'Hỏi đáp' },
 ]
 export function Header() {
+  const headerRef = useRef<HTMLElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   useEffect(() => {
@@ -56,17 +57,44 @@ export function Header() {
       }
     }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    const onOutside = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setMenuOpen(false)
+    }
+    const desktop = window.matchMedia('(min-width: 1001px)')
+    const onDesktop = () => {
+      if (desktop.matches) setMenuOpen(false)
+    }
+    document.addEventListener('pointerdown', onOutside)
+    desktop.addEventListener('change', onDesktop)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.removeEventListener('pointerdown', onOutside)
+      desktop.removeEventListener('change', onDesktop)
+    }
   }, [menuOpen])
   return (
     <>
       <a href="#noi-dung" className="skip-link">
         Đến nội dung chính
       </a>
-      <div className="top-note">
-        Từ đôi bàn tay lành nghề, đến những điều tử tế.
+      <div className="top-note atelier-note">
+        <span aria-hidden className="nav-spark">
+          ✦
+        </span>
+        Cùng nhau làm điều tử tế.
+        <span className="nav-note-end">Vì người thợ. Vì những mái nhà.</span>
       </div>
-      <header className="site-header">
+      <header
+        className="site-header atelier-header"
+        ref={headerRef}
+        onBlur={(event) => {
+          if (
+            event.relatedTarget &&
+            !event.currentTarget.contains(event.relatedTarget)
+          )
+            setMenuOpen(false)
+        }}
+      >
         <div className="page-width header-inner">
           <a
             href="/"
@@ -84,24 +112,32 @@ export function Header() {
                   activeSection === link.href ? 'location' : undefined
                 }
               >
-                {link.label}
+                <span>{link.label}</span>
               </a>
             ))}
           </nav>
           <div className="header-actions">
-            <button
-              className="button button-small button-blue"
-              onClick={() => open('can-giup')}
-            >
-              Tôi cần giúp đỡ <ArrowUpRight size={16} aria-hidden />
+            <button className="nav-help-link" onClick={() => open('can-giup')}>
+              Tôi cần giúp đỡ
             </button>
+            <a
+              href="#dong-hanh"
+              className="nav-give-button"
+              onClick={() => setMenuOpen(false)}
+            >
+              <span className="nav-give-desktop">Gửi một tấm lòng</span>
+              <span className="nav-give-mobile">Gửi góp</span>
+              <span className="nav-give-arrow" aria-hidden>
+                <ArrowUpRight size={16} />
+              </span>
+            </a>
             <button
               id="menu-toggle"
               className="icon-button menu-toggle"
               aria-label={menuOpen ? 'Đóng menu' : 'Mở menu'}
               aria-expanded={menuOpen}
               aria-controls="mobile-nav"
-              onClick={() => setMenuOpen(!menuOpen)}
+              onClick={() => setMenuOpen((previous) => !previous)}
             >
               {menuOpen ? <X aria-hidden /> : <Menu aria-hidden />}
             </button>
@@ -113,7 +149,15 @@ export function Header() {
           aria-label="Điều hướng di động"
           hidden={!menuOpen}
         >
-          {links.map((link) => (
+          <div className="nav-menu-intro">
+            <span>CÙNG VUA THỢ</span>
+            <p>
+              Một cộng đồng.
+              <br />
+              <em>Chung một tấm lòng.</em>
+            </p>
+          </div>
+          {links.map((link, index) => (
             <a
               key={link.href}
               href={link.href}
@@ -122,10 +166,31 @@ export function Header() {
               }
               onClick={() => setMenuOpen(false)}
             >
-              {link.label}
+              <span className="nav-menu-number" aria-hidden>
+                0{index + 1}
+              </span>
+              <span>{link.label}</span>
               <ArrowUpRight size={16} aria-hidden />
             </a>
           ))}
+          <div className="nav-menu-footer">
+            <p>
+              Khi cần một điểm tựa,
+              <br />
+              Vua Thợ sẵn lòng lắng nghe.
+            </p>
+            <button
+              onClick={() => {
+                setMenuOpen(false)
+                document
+                  .getElementById('menu-toggle')
+                  ?.focus({ preventScroll: true })
+                open('can-giup')
+              }}
+            >
+              Tôi cần giúp đỡ <ArrowUpRight size={15} aria-hidden />
+            </button>
+          </div>
         </nav>
       </header>
     </>
