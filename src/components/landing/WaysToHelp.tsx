@@ -1,14 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import {
   ArrowLeft,
-  ArrowDown,
   ArrowUpRight,
   Check,
   Copy,
-  HandHeart,
   Heart,
-  HeartPulse,
-  House,
   Landmark,
 } from 'lucide-react'
 import type { FormEvent } from 'react'
@@ -26,17 +22,14 @@ import { StoryImage } from '#/components/ui/StoryImage'
 
 const purposes = [
   {
-    icon: HeartPulse,
     title: 'Thêm điểm tựa lúc đau ốm',
     text: 'San sẻ gánh nặng khi sức khỏe khiến người thợ phải tạm dừng công việc.',
   },
   {
-    icon: House,
     title: 'Đỡ đần những ngày khó',
     text: 'Hỗ trợ nhu cầu thiết yếu của người thợ và gia đình trong lúc chật vật.',
   },
   {
-    icon: HandHeart,
     title: 'Tiếp sức để bước tiếp',
     text: 'Dành sự giúp đỡ cho hoàn cảnh cần thiết, theo xem xét của đội ngũ Vua Thợ.',
   },
@@ -103,7 +96,7 @@ export function WaysToHelp() {
   return (
     <section
       id="dong-hanh"
-      className="ways-section section-space"
+      className="ways-section section-space gift-section"
       aria-labelledby="ways-title"
     >
       <div className="page-width donation-layout">
@@ -127,68 +120,19 @@ export function WaysToHelp() {
             Có những lúc, một gia đình chỉ cần thêm một điểm tựa để đi qua ngày
             khó. Mỗi khoản góp, dù nhỏ, đều có thể tiếp thêm sự ấm áp ấy.
           </p>
-          <a
-            href="#chon-khoan-gop"
-            className="button button-blue donation-mobile-jump"
-          >
-            Chọn khoản góp của bạn <ArrowDown size={17} aria-hidden />
-          </a>
-          <figure className="donation-painting">
-            <StoryImage
-              name="kindness"
-              alt="Tranh minh họa một cuộc trò chuyện sẻ chia bên bàn trà."
-              sizes="180px"
-            />
-            <figcaption>
-              Một chút từ bạn.
-              <br />
-              <em>Một điểm tựa cho ai đó.</em>
-            </figcaption>
-          </figure>
-          <div className="donation-purpose">
-            {purposes.map(({ icon: Icon, title, text }) => (
-              <article key={title}>
-                <span className="purpose-emblem" aria-hidden>
-                  <Icon size={22} strokeWidth={1.5} />
-                </span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="allocation-note">
-            <div>
-              <strong>Gửi gắm tấm lòng, cùng hiểu cách trao.</strong>
-              <p>
-                Khoản góp được tiếp nhận chung. Vua Thợ trực tiếp xem xét, lựa
-                chọn và phân bổ cho hoàn cảnh phù hợp trong phạm vi mục đích hỗ
-                trợ đã công bố.
-              </p>
-              <a href="#minh-bach" className="text-link">
-                Hiểu cách Vua Thợ phân bổ
-                <ArrowUpRight size={16} aria-hidden />
-              </a>
-            </div>
-          </div>
-          <button
-            className="text-link donation-business"
-            onClick={() => open('doanh-nghiep')}
-          >
-            Doanh nghiệp muốn đồng hành?
-            <ArrowUpRight size={16} aria-hidden />
-          </button>
         </div>
         <div id="chon-khoan-gop" className="donation-card">
           <div className="donation-card-heading">
             <div>
               <p className="eyebrow">TỰ NGUYỆN TỪ TẤM LÒNG</p>
               <h3 ref={titleRef} tabIndex={-1}>
-                {transfer
-                  ? 'Thông tin chuyển khoản'
-                  : 'Góp một chút, ấm thêm nhiều.'}
+                {transfer ? 'Thông tin chuyển khoản' : 'Gửi góp cùng Vua Thợ'}
               </h3>
+              <p className="gift-card-subtitle">
+                {transfer
+                  ? 'Quét mã và xác nhận trong ứng dụng ngân hàng.'
+                  : 'Chọn một khoản trong khả năng của bạn.'}
+              </p>
             </div>
           </div>
           <ol className="donation-progress" aria-label="Các bước đóng góp">
@@ -342,7 +286,9 @@ export function WaysToHelp() {
                   }}
                   aria-invalid={amountError ? true : undefined}
                   aria-describedby={
-                    amountError ? 'donation-amount-error' : undefined
+                    amountError
+                      ? 'donation-amount-error donation-amount-hint'
+                      : 'donation-amount-hint'
                   }
                 />
                 <span>VND</span>
@@ -356,16 +302,17 @@ export function WaysToHelp() {
                   {amountError}
                 </p>
               )}
-              <p className="donation-gentle-note">
+              <p id="donation-amount-hint" className="donation-gentle-note">
                 Các mức trên chỉ là gợi ý. Bạn chọn trong khả năng của mình.
               </p>
               <div className="donation-method">
-                <Landmark size={24} strokeWidth={1.4} aria-hidden />
+                <span className="gift-bank-mark" aria-hidden>
+                  MB
+                </span>
                 <div>
-                  <strong>Chuyển khoản ngân hàng</strong>
-                  <span>MB Bank · QR tự điền số tiền và nội dung</span>
+                  <strong>Tài khoản công ty · MB Bank</strong>
+                  <span>QR điền sẵn số tiền và nội dung</span>
                 </div>
-                <Check size={17} aria-hidden />
               </div>
               <div className="donation-consent">
                 <input
@@ -403,6 +350,17 @@ export function WaysToHelp() {
                   {consentError}
                 </p>
               )}
+              <div
+                className="gift-amount-summary"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <span>Khoản góp của bạn</span>
+                <strong>
+                  {amount !== null ? formatVnd(amount) : 'Tùy tâm lựa chọn'}
+                </strong>
+              </div>
               <button type="submit" className="button button-blue">
                 {ready ? 'Tạo QR chuyển khoản' : 'Xem trước chuyển khoản'}
                 <ArrowUpRight size={18} aria-hidden />
@@ -418,6 +376,58 @@ export function WaysToHelp() {
             <Heart size={14} aria-hidden />
             Tấm lòng tùy tâm. Sự trân trọng như nhau.
           </div>
+        </div>
+        <div className="gift-story">
+          <figure className="donation-painting">
+            <StoryImage
+              name="kindness"
+              alt="Tranh minh họa một cuộc trò chuyện sẻ chia bên bàn trà."
+              sizes="(max-width: 900px) 100vw, 45vw"
+            />
+            <figcaption>
+              <span>MỖI TẤM LÒNG ĐỀU ĐÁNG QUÝ</span>
+              <p>
+                Một chút từ bạn.
+                <br />
+                <em>Một điểm tựa cho ai đó.</em>
+              </p>
+            </figcaption>
+          </figure>
+          <p className="gift-purpose-label">CÙNG SAN SẺ NHỮNG NGÀY KHÓ</p>
+          <div className="donation-purpose">
+            {purposes.map(({ title, text }, index) => (
+              <article key={title}>
+                <span className="gift-purpose-number" aria-hidden>
+                  0{index + 1}
+                </span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="allocation-note">
+            <div>
+              <strong>Gửi gắm tấm lòng, cùng hiểu cách trao.</strong>
+              <p>
+                Khoản góp được tiếp nhận chung. Vua Thợ trực tiếp xem xét, lựa
+                chọn và phân bổ cho hoàn cảnh phù hợp trong phạm vi mục đích hỗ
+                trợ đã công bố.
+              </p>
+              <a href="#minh-bach" className="text-link">
+                Hiểu cách Vua Thợ phân bổ
+                <ArrowUpRight size={16} aria-hidden />
+              </a>
+            </div>
+          </div>
+          <button
+            className="text-link donation-business"
+            onClick={() => open('doanh-nghiep')}
+          >
+            Doanh nghiệp muốn đồng hành?
+            <ArrowUpRight size={16} aria-hidden />
+          </button>
         </div>
       </div>
     </section>
