@@ -4,10 +4,30 @@ import { BrandLogo } from '#/components/ui/BrandLogo'
 import { useContact } from '#/components/landing/ContactDialog'
 
 const links = [
-  { href: '#su-menh', label: 'Tấm lòng Vua Thợ' },
-  { href: '#dong-hanh', label: 'Cùng chung tay' },
-  { href: '#minh-bach', label: 'Điều làm nên niềm tin' },
-  { href: '#hoi-dap', label: 'Hỏi đáp' },
+  {
+    href: '#su-menh',
+    label: 'Tấm lòng Vua Thợ',
+    short: 'Sứ mệnh',
+    note: 'Điều chúng tôi tin',
+  },
+  {
+    href: '#dong-hanh',
+    label: 'Cùng chung tay',
+    short: 'Đồng hành',
+    note: 'Gửi một khoản tùy tâm',
+  },
+  {
+    href: '#minh-bach',
+    label: 'Điều làm nên niềm tin',
+    short: 'Minh bạch',
+    note: 'Rõ ràng để an tâm',
+  },
+  {
+    href: '#hoi-dap',
+    label: 'Hỏi đáp',
+    short: 'Hỏi đáp',
+    note: 'Mình cùng hiểu rõ',
+  },
 ]
 export function Header() {
   const headerRef = useRef<HTMLElement>(null)
@@ -77,15 +97,8 @@ export function Header() {
       <a href="#noi-dung" className="skip-link">
         Đến nội dung chính
       </a>
-      <div className="top-note atelier-note">
-        <span aria-hidden className="nav-spark">
-          ✦
-        </span>
-        Cùng nhau làm điều tử tế.
-        <span className="nav-note-end">Vì người thợ. Vì những mái nhà.</span>
-      </div>
       <header
-        className="site-header atelier-header"
+        className="site-header modern-header"
         ref={headerRef}
         onBlur={(event) => {
           if (
@@ -112,7 +125,7 @@ export function Header() {
                   activeSection === link.href ? 'location' : undefined
                 }
               >
-                <span>{link.label}</span>
+                {link.short}
               </a>
             ))}
           </nav>
@@ -125,8 +138,7 @@ export function Header() {
               className="nav-give-button"
               onClick={() => setMenuOpen(false)}
             >
-              <span className="nav-give-desktop">Gửi một tấm lòng</span>
-              <span className="nav-give-mobile">Gửi góp</span>
+              <span>Gửi tấm lòng</span>
               <span className="nav-give-arrow" aria-hidden>
                 <ArrowUpRight size={16} />
               </span>
@@ -149,14 +161,7 @@ export function Header() {
           aria-label="Điều hướng di động"
           hidden={!menuOpen}
         >
-          <div className="nav-menu-intro">
-            <span>CÙNG VUA THỢ</span>
-            <p>
-              Một cộng đồng.
-              <br />
-              <em>Chung một tấm lòng.</em>
-            </p>
-          </div>
+          <p className="nav-menu-eyebrow">CHỌN ĐIỀU BẠN QUAN TÂM</p>
           {links.map((link, index) => (
             <a
               key={link.href}
@@ -169,7 +174,10 @@ export function Header() {
               <span className="nav-menu-number" aria-hidden>
                 0{index + 1}
               </span>
-              <span>{link.label}</span>
+              <span className="mobile-link-copy">
+                <strong>{link.short}</strong>
+                <small>{link.note}</small>
+              </span>
               <ArrowUpRight size={16} aria-hidden />
             </a>
           ))}
