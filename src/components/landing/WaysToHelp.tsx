@@ -22,6 +22,7 @@ import {
 } from '#/data/donation'
 import { BankQr } from '#/components/landing/BankQr'
 import { formatVnd } from '#/lib/format'
+import { StoryImage } from '#/components/ui/StoryImage'
 
 const purposes = [
   {
@@ -132,6 +133,18 @@ export function WaysToHelp() {
           >
             Chọn khoản góp của bạn <ArrowDown size={17} aria-hidden />
           </a>
+          <figure className="donation-painting">
+            <StoryImage
+              name="kindness"
+              alt="Tranh minh họa một cuộc trò chuyện sẻ chia bên bàn trà."
+              sizes="180px"
+            />
+            <figcaption>
+              Một chút từ bạn.
+              <br />
+              <em>Một điểm tựa cho ai đó.</em>
+            </figcaption>
+          </figure>
           <div className="donation-purpose">
             {purposes.map(({ icon: Icon, title, text }) => (
               <article key={title}>

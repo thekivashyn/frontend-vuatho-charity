@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import { Reveal } from '#/components/ui/Reveal'
+import { StoryImage } from '#/components/ui/StoryImage'
 
 const pillars = [
   {
@@ -52,14 +53,9 @@ export function Mission() {
         <Reveal>
           <div className="mission-feature">
             <figure>
-              <img
-                src="/images/tools-for-tomorrow.jpg"
-                srcSet="/images/tools-for-tomorrow-768.jpg 768w, /images/tools-for-tomorrow.jpg 1536w"
-                sizes="(max-width: 640px) calc(100vw - 52px), (max-width: 1320px) 47vw, 600px"
-                alt="Tranh minh họa túi đồ nghề, đôi găng tay và chiếc áo lao động trên bàn gỗ dưới nắng sớm."
-                width={1536}
-                height={1024}
-                loading="lazy"
+              <StoryImage
+                name="home-stilllife"
+                alt="Tranh minh họa bộ đồ nghề bên cặp sách của con và bàn cơm gia đình."
               />
               <figcaption>
                 Đồ nghề giữ kế sinh nhai. Tình người giữ niềm hy vọng.

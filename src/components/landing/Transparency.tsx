@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { useContact } from '#/components/landing/ContactDialog'
 import { Reveal } from '#/components/ui/Reveal'
+import { StoryImage } from '#/components/ui/StoryImage'
 
 const principles = [
   {
@@ -59,6 +60,15 @@ export function Transparency() {
               Đọc nguyên tắc phân bổ
               <ArrowUpRight size={18} aria-hidden />
             </a>
+            <figure className="trust-painting">
+              <StoryImage
+                name="careful-records"
+                alt="Tranh minh họa đôi tay cẩn thận đối chiếu sổ ghi chép bên cửa sổ."
+              />
+              <figcaption>
+                Sự cẩn trọng cũng là một cách trao yêu thương.
+              </figcaption>
+            </figure>
           </div>
         </Reveal>
         <div className="trust-principles">

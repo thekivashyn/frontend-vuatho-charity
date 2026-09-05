@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import { useContact } from '#/components/landing/ContactDialog'
+import { StoryImage } from '#/components/ui/StoryImage'
 
 export function CallToAction() {
   const { open } = useContact()
@@ -10,6 +11,21 @@ export function CallToAction() {
       aria-labelledby="join-title"
     >
       <div className="page-width join-grid">
+        <figure className="morning-banner">
+          <StoryImage
+            name="new-morning"
+            alt="Tranh minh họa người thợ mang túi đồ nghề bước ra ngõ trong nắng sớm, con nhỏ vẫy chào."
+            sizes="(max-width: 1320px) 100vw, 1240px"
+          />
+          <figcaption>
+            <span>CHO NHỮNG NGÀY PHÍA TRƯỚC</span>
+            <p>
+              Mong ngày mai,
+              <br />
+              <em>đôi vai nhẹ hơn.</em>
+            </p>
+          </figcaption>
+        </figure>
         <div className="join-main">
           <span className="kindness-flower" aria-hidden>
             <i />

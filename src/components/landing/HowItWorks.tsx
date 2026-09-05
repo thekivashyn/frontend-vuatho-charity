@@ -1,5 +1,8 @@
 import { steps } from '#/data/content'
 import { Reveal } from '#/components/ui/Reveal'
+import { StoryImage } from '#/components/ui/StoryImage'
+
+const stepImages = ['kindness', 'careful-records', 'new-morning'] as const
 
 export function HowItWorks() {
   return (
@@ -29,6 +32,13 @@ export function HowItWorks() {
           {steps.map((step, index) => {
             return (
               <li key={step.title}>
+                <div className="process-painting">
+                  <StoryImage
+                    name={stepImages[index]}
+                    alt=""
+                    sizes="(max-width: 640px) calc(100vw - 110px), 33vw"
+                  />
+                </div>
                 <div className="process-symbol" aria-hidden="true">
                   <span>0{index + 1}</span>
                   <i />

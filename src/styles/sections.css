@@ -1762,3 +1762,357 @@ p {
     display: none;
   }
 }
+
+/* A painted journey from homecoming to a hopeful new morning. */
+.homecoming-hero {
+  background: #f8f4e9;
+}
+.homecoming-stage {
+  position: relative;
+  isolation: isolate;
+  min-height: 690px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.homecoming-art {
+  position: absolute;
+  inset: 0 0 0 28%;
+  margin: 0;
+  z-index: -1;
+}
+.homecoming-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% 50%;
+}
+.homecoming-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #f8f4e9 0%,
+    rgba(248, 244, 233, 0.95) 7%,
+    rgba(248, 244, 233, 0.55) 25%,
+    transparent 48%
+  );
+}
+.homecoming-art figcaption {
+  position: absolute;
+  right: 5%;
+  bottom: 26px;
+  z-index: 1;
+  color: #fff7df;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  text-shadow: 0 2px 12px #152f2e;
+  background: #173d3bba;
+  padding: 9px 17px;
+  border-radius: 2px;
+}
+.homecoming-content {
+  padding-block: 56px;
+}
+.homecoming-copy {
+  max-width: 555px;
+}
+.homecoming-copy .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  margin-bottom: 25px;
+}
+.homecoming-copy h1 {
+  font-family: var(--serif);
+  font-size: clamp(48px, 5.1vw, 73px);
+  font-weight: 500;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  color: #193e3c;
+  margin: 0 0 24px;
+}
+.homecoming-copy h1 em {
+  display: block;
+  color: #8a6330;
+  font-weight: 400;
+  margin-top: 5px;
+}
+.homecoming-description {
+  max-width: 375px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #52635c;
+}
+.homecoming-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 23px;
+  margin-top: 28px;
+}
+.homecoming-actions .text-link {
+  font-size: 12px;
+}
+.homecoming-footnote {
+  font-size: 11px;
+  color: #6b786a;
+  margin-top: 17px;
+}
+.homecoming-afterword {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  padding-block: 29px;
+}
+.homecoming-afterword > span {
+  max-width: 190px;
+  font-size: 9px;
+  line-height: 1.9;
+  letter-spacing: 0.12em;
+  color: #697765;
+}
+.homecoming-afterword p {
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.5;
+  color: #244a41;
+}
+.homecoming-afterword p em {
+  color: #89704a;
+}
+.homecoming-afterword > a {
+  display: grid;
+  place-items: center;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #cdd2bd;
+  border-radius: 50%;
+  color: #315a48;
+  flex-shrink: 0;
+}
+.donation-painting {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 27px 0 8px;
+  overflow: hidden;
+  background: #edece0;
+  border-radius: 3px 18px 18px 3px;
+}
+.donation-painting img {
+  width: 145px;
+  height: 116px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.donation-painting figcaption {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.6;
+  color: #385745;
+  padding: 12px 15px 12px 0;
+}
+.process-painting {
+  overflow: hidden;
+  border-radius: 4px 24px 4px 4px;
+  margin-bottom: 25px;
+  aspect-ratio: 1.65;
+}
+.process-painting img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.trust-painting {
+  margin: 30px 0 0;
+  max-width: 440px;
+}
+.trust-painting img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.6;
+  object-fit: cover;
+  border-radius: 3px 28px 3px 3px;
+}
+.trust-painting figcaption {
+  margin-top: 12px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #e0d2b4;
+}
+.morning-banner {
+  grid-column: 1 / -1;
+  position: relative;
+  margin: 0 0 12px;
+  border-radius: 28px 28px 5px 5px;
+  overflow: hidden;
+  aspect-ratio: 2.8;
+  isolation: isolate;
+}
+.morning-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 59%;
+}
+.morning-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, transparent 30%, #163e3b70 65%, #163e3bb3);
+}
+.morning-banner figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff5da;
+}
+.morning-banner figcaption > span {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+.morning-banner p {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height: 1.25;
+  margin-top: 17px;
+  letter-spacing: -0.035em;
+}
+@media (min-width: 761px) and (max-width: 1000px) {
+  .homecoming-stage {
+    min-height: 630px;
+  }
+  .homecoming-art {
+    left: 23%;
+  }
+  .homecoming-copy {
+    max-width: 425px;
+  }
+  .homecoming-description {
+    max-width: 305px;
+  }
+  .homecoming-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 760px) {
+  .homecoming-stage {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .homecoming-content {
+    order: 0;
+    padding-block: 37px 28px;
+  }
+  .homecoming-copy {
+    max-width: 540px;
+  }
+  .homecoming-copy h1 {
+    font-size: clamp(42px, 9vw, 63px);
+    margin-bottom: 20px;
+  }
+  .homecoming-copy .eyebrow {
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    margin-bottom: 22px;
+  }
+  .homecoming-description {
+    max-width: 400px;
+    font-size: 14px;
+  }
+  .homecoming-actions {
+    margin-top: 23px;
+    gap: 19px;
+  }
+  .homecoming-art {
+    position: relative;
+    inset: auto;
+    order: 1;
+    width: 100%;
+    aspect-ratio: 1.5;
+    z-index: 0;
+  }
+  .homecoming-art::after {
+    background: linear-gradient(0deg, #173d3b65, transparent 38%);
+  }
+  .homecoming-art img {
+    object-position: 60% 50%;
+  }
+  .homecoming-art figcaption {
+    bottom: 16px;
+    right: 20px;
+    font-size: 13px;
+    background: transparent;
+    padding: 0;
+  }
+  .homecoming-afterword {
+    padding-block: 24px;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .homecoming-afterword > span {
+    max-width: none;
+    width: 100%;
+    font-size: 8px;
+  }
+  .homecoming-afterword p {
+    font-size: 18px;
+  }
+  .homecoming-afterword > a {
+    width: 38px;
+    height: 38px;
+  }
+  .donation-painting {
+    gap: 16px;
+  }
+  .donation-painting img {
+    width: 115px;
+    height: 108px;
+  }
+  .donation-painting figcaption {
+    font-size: 16px;
+  }
+  .trust-painting {
+    max-width: none;
+  }
+  .morning-banner {
+    aspect-ratio: 1.3;
+    border-radius: 20px 20px 4px 4px;
+  }
+  .morning-banner img {
+    object-position: 35% 50%;
+  }
+  .morning-banner::after {
+    background: linear-gradient(0deg, #173d3bd9, transparent 75%);
+  }
+  .morning-banner figcaption {
+    top: auto;
+    bottom: 24px;
+    right: 23px;
+    left: 23px;
+    transform: none;
+  }
+  .morning-banner figcaption > span {
+    font-size: 8px;
+  }
+  .morning-banner p {
+    font-size: 32px;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 640px) {
+  .process-painting {
+    aspect-ratio: 1.9;
+    margin-bottom: 20px;
+  }
+}
