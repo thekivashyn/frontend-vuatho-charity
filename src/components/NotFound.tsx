@@ -11,7 +11,7 @@ export function NotFound() {
           Trang này không tồn tại
         </h1>
         <p className="mt-3 text-ink-600">
-          Có thể đường dẫn đã thay đổi hoặc hoàn cảnh đã được hỗ trợ xong.
+          Đường dẫn có thể đã thay đổi. Mời bạn trở về trang chủ Vua Thợ.
         </p>
         <a href="/" className={buttonClass('dark', 'md', 'mt-8')}>
           <ArrowLeft className="size-4" aria-hidden />

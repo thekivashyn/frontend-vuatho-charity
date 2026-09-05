@@ -1,33 +1,34 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
-
 import appCss from '../styles.css?url'
+import sectionsCss from '../styles/sections.css?url'
 
 export const Route = createRootRoute({
   head: () => ({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'theme-color', content: '#f45f22' },
-      { title: 'Vua Thợ Charity - Thợ giúp thợ, có nhiêu góp nhiêu' },
+      { name: 'theme-color', content: '#183d62' },
+      { title: 'Vua Thợ — Vững một tay nghề. Ấm một mái nhà.' },
       {
         name: 'description',
         content:
-          'Quỹ tương trợ của cộng đồng thợ Việt Nam. Hỗ trợ anh em thợ gặp tai nạn lao động, bệnh hiểm nghèo, mất kế sinh nhai. Không có mức góp tối thiểu.',
+          'Gửi góp tự nguyện cùng Vua Thợ. Công ty tiếp nhận và xem xét phân bổ hỗ trợ cho người thợ, gia đình gặp khó khăn.',
       },
-      { property: 'og:title', content: 'Vua Thợ Charity' },
+      {
+        property: 'og:title',
+        content: 'Vua Thợ — Vững một tay nghề. Ấm một mái nhà.',
+      },
       {
         property: 'og:description',
-        content: 'Khi một người thợ gục ngã, cả cộng đồng thợ đỡ lấy.',
+        content:
+          'Mỗi khoản góp là một tấm lòng. Cùng Vua Thợ đỡ đần người thợ và gia đình qua những ngày khó.',
       },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:locale', content: 'vi_VN' },
     ],
     links: [
-      {
-        rel: 'icon',
-        type: 'image/svg+xml',
-        href: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23f45f22'/%3E%3Ctext x='32' y='41' font-family='Arial, sans-serif' font-size='26' font-weight='700' fill='white' text-anchor='middle'%3EVT%3C/text%3E%3C/svg%3E",
-      },
+      { rel: 'icon', type: 'image/png', href: '/favicon.png' },
+      { rel: 'apple-touch-icon', href: '/favicon.png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       {
         rel: 'preconnect',
@@ -36,14 +37,14 @@ export const Route = createRootRoute({
       },
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap',
       },
       { rel: 'stylesheet', href: appCss },
+      { rel: 'stylesheet', href: sectionsCss },
     ],
   }),
   shellComponent: RootDocument,
 })
-
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html lang="vi">
@@ -52,17 +53,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        {import.meta.env.DEV && (
-          <TanStackDevtools
-            config={{ position: 'bottom-right' }}
-            plugins={[
-              {
-                name: 'Tanstack Router',
-                render: <TanStackRouterDevtoolsPanel />,
-              },
-            ]}
-          />
-        )}
         <Scripts />
       </body>
     </html>

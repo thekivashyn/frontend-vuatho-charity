@@ -1,128 +1,91 @@
-import { Award, Download, MapPinCheck, Receipt } from 'lucide-react'
-
-import { buttonClass } from '#/components/ui/Button'
+import {
+  ArrowUpRight,
+  ClipboardCheck,
+  FileText,
+  Fingerprint,
+} from 'lucide-react'
+import { useContact } from '#/components/landing/ContactDialog'
 import { Reveal } from '#/components/ui/Reveal'
-import { SectionHeading } from '#/components/ui/SectionHeading'
-import { allocation } from '#/data/content'
 
-const pillars = [
+const principles = [
   {
-    icon: Receipt,
-    title: 'Chứng từ cho từng khoản',
+    icon: ClipboardCheck,
+    title: 'Nội bộ xét duyệt, đúng mục đích hỗ trợ',
     description:
-      'Mỗi lần chuyển tiền đến gia đình hoặc bệnh viện đều được đăng kèm chứng từ trong 48 giờ. Bạn xem được ngay trên trang hoàn cảnh.',
+      'Vua Thợ lựa chọn hoàn cảnh, mức và thời điểm hỗ trợ dựa trên nhu cầu, mức độ cấp thiết và nguồn lực. Khoản góp thông thường được phân bổ chung, không chỉ định một người nhận.',
   },
   {
-    icon: MapPinCheck,
-    title: 'Thợ địa phương xác minh và bảo lãnh',
+    icon: FileText,
+    title: 'Theo dõi khoản nhận, khoản chi',
     description:
-      'Người xác minh có tên, có nghề, ở cùng khu vực với hoàn cảnh. Họ chịu trách nhiệm với cộng đồng về điều mình bảo lãnh.',
+      'Ghi nhận theo số tiền thực nhận, đối soát và theo dõi việc sử dụng. Phần chưa phân bổ tiếp tục được quản lý trong phạm vi mục đích đã công bố.',
   },
   {
-    icon: Award,
-    title: 'Kiểm toán độc lập hằng năm',
+    icon: Fingerprint,
+    title: 'Rõ ràng với người góp, tôn trọng người nhận',
     description:
-      'Báo cáo tài chính được kiểm toán bởi đơn vị độc lập và công bố công khai vào quý I mỗi năm.',
+      'Thông tin tiếp nhận, phân bổ cần được công khai phù hợp với quy định. Đồng thời bảo vệ thông tin ngân hàng, danh tính và đời tư của người trong cuộc.',
   },
 ]
-
-const colors = ['bg-brand-500', 'bg-ink-700', 'bg-ink-300']
-
 export function Transparency() {
+  const { open } = useContact()
   return (
-    <section id="minh-bach" className="bg-white">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:py-28">
+    <section
+      id="minh-bach"
+      className="trust-section section-space"
+      aria-labelledby="trust-title"
+    >
+      <div className="page-width trust-grid">
         <Reveal>
-          <SectionHeading
-            eyebrow="Minh bạch"
-            title="Bạn biết chính xác tiền của mình đến tay ai"
-            description="Tiền của anh em thợ là tiền mồ hôi. Chúng tôi giữ nó như giữ của chính mình."
-          />
-          <ul className="mt-10 space-y-8">
-            {pillars.map((pillar) => (
-              <li key={pillar.title} className="flex gap-4">
-                <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-ink-50 text-brand-600">
-                  <pillar.icon className="size-5" aria-hidden />
-                </span>
-                <div>
-                  <h3 className="font-semibold text-ink-900">{pillar.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-ink-600">
-                    {pillar.description}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-
-        <Reveal delay={100}>
-          <div className="rounded-3xl bg-ink-50 p-6 sm:p-8">
-            <p className="font-semibold text-ink-900">
-              Mỗi 100.000đ bạn góp đi đâu
+          <div className="trust-copy">
+            <p className="eyebrow">
+              <span className="section-number" aria-hidden>
+                04
+              </span>
+              TRÁCH NHIỆM VỚI TỪNG SỰ GỬI GẮM
             </p>
-            <p className="mt-1 text-sm text-ink-500">
-              Số liệu năm 2025, đã kiểm toán.
+            <h2 id="trust-title">
+              Tấm lòng cần
+              <br />
+              được đặt vào
+              <br />
+              <em>đúng chỗ.</em>
+            </h2>
+            <p>
+              Bạn tin tưởng gửi góp. Vua Thợ chịu trách nhiệm xem xét và sử dụng
+              nguồn hỗ trợ trong phạm vi đã công bố.
             </p>
-
-            <div
-              className="mt-6 flex h-3 gap-0.5 overflow-hidden rounded-full"
-              role="img"
-              aria-label="Phân bổ: 95% chuyển thẳng đến gia đình thợ, 3% xác minh và đi lại, 2% vận hành"
-            >
-              {allocation.map((item, index) => (
-                <div
-                  key={item.label}
-                  className={`${colors[index]} rounded-full`}
-                  style={{ width: `${item.value}%` }}
-                />
-              ))}
-            </div>
-
-            <ul className="mt-5 space-y-3">
-              {allocation.map((item, index) => (
-                <li
-                  key={item.label}
-                  className="flex items-center justify-between text-sm"
-                >
-                  <span className="flex items-center gap-2.5 text-ink-700">
-                    <span
-                      className={`size-2.5 rounded-full ${colors[index]}`}
-                      aria-hidden
-                    />
-                    {item.label}
-                  </span>
-                  <span className="font-semibold tabular-nums text-ink-900">
-                    {item.value}%
-                  </span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-white p-4 shadow-soft">
-                <p className="text-2xl font-semibold tabular-nums text-ink-900">
-                  48,2 tỷ
-                </p>
-                <p className="mt-0.5 text-xs text-ink-500">
-                  Đã trao đến gia đình thợ
-                </p>
-              </div>
-              <div className="rounded-2xl bg-white p-4 shadow-soft">
-                <p className="text-2xl font-semibold tabular-nums text-ink-900">
-                  24 giờ
-                </p>
-                <p className="mt-0.5 text-xs text-ink-500">
-                  Thời gian chuyển tiền trung bình
-                </p>
-              </div>
-            </div>
-
-            <a href="#" className={buttonClass('white', 'md', 'mt-6 w-full')}>
-              <Download className="size-4" aria-hidden />
-              Tải báo cáo tài chính 2025
+            <a href="#dieu-kien" className="text-link">
+              Đọc nguyên tắc phân bổ
+              <ArrowUpRight size={18} aria-hidden />
             </a>
           </div>
         </Reveal>
+        <div className="trust-principles">
+          {principles.map(({ icon: Icon, title, description }, index) => (
+            <Reveal key={title} delay={index * 60}>
+              <article>
+                <span className="trust-icon">
+                  <Icon size={25} strokeWidth={1.4} aria-hidden />
+                </span>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+          <div className="donation-report-note">
+            <p>
+              Trang chưa hiển thị báo cáo thu–chi. Khi cần làm rõ một khoản góp,
+              bạn có thể yêu cầu đội ngũ đối soát qua kênh liên hệ riêng.
+            </p>
+            <button className="text-link" onClick={() => open('doi-soat')}>
+              Hỏi về đối soát & sử dụng khoản góp
+              <ArrowUpRight size={16} aria-hidden />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   )
